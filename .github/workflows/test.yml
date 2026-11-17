@@ -18,6 +18,9 @@ jobs:
         run: |
           mkdir -p "$(brew --repository)/Library/Taps/shatalov-alex"
           ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/shatalov-alex/homebrew-tap"
+      - name: Trust the formula
+        # brew install trusts a fully qualified name by itself; audit runs before it
+        run: brew trust --formula shatalov-alex/tap/kcsecret
       - name: Audit
         run: brew audit --strict --online shatalov-alex/tap/kcsecret
       - name: Install
